@@ -59,7 +59,7 @@ class NodeConnection(threading.Thread):
         """Send the data to the connected node. The data can be pure text (str), dict object (send as json) and bytes object.
            When sending bytes object, it will be using standard socket communication. A end of transmission character 0x04 
            utf-8/ascii will be used to decode the packets ate the other node."""
-        print("i can edit this package")
+        # self.sock.setblocking(0)
         if isinstance(data, str):
             self.sock.sendall( data.encode(encoding_type) + self.EOT_CHAR )
 

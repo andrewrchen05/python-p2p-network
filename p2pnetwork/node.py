@@ -215,6 +215,7 @@ class Node(threading.Thread):
             try:
                 self.debug_print("Node: Wait for incoming connection")
                 connection, client_address = self.sock.accept()
+                connection.setblocking(0)
                 
                 # Basic information exchange (not secure) of the id's of the nodes!
                 connected_node_id = connection.recv(4096).decode('utf-8') # When a node is connected, it sends it id!

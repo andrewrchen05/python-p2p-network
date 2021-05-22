@@ -17,21 +17,20 @@ class MyOwnPeer2PeerNode (Node):
 # implement your network node behavior to create the required functionality.
     def outbound_node_connected(self, node):
         print("outbound_node_connected: " + node.id)
-        print("\nEnter your message: ")
         
     def inbound_node_connected(self, node):
         print("inbound_node_connected: " + node.id)
-        print("\nEnter your message: ")
 
     def inbound_node_disconnected(self, node):
         print("inbound_node_disconnected: " + node.id)
+        
 
     def outbound_node_disconnected(self, node):
         print("outbound_node_disconnected: " + node.id)
 
     def node_message(self, node, data):
         print("node_message from " + node.id + ": " + str(data))
-        print("\nEnter your message: ")
+        print("\nEnter your message:")
         
     def node_disconnect_with_outbound_node(self, node):
         print("node wants to disconnect with oher outbound node: " + node.id)
@@ -49,13 +48,13 @@ print("This is the LOCAL IP: " + local_ip)
 #--------------------------------------------------
 
 #---------THIS CREATES THE NODE--------------------
-node_1 = MyOwnPeer2PeerNode(local_ip, 8001)
+node_1 = MyOwnPeer2PeerNode(local_ip, 8003)
 #--------------------------------------------------
 
 #---------FIND NODES AND THEN CONNECT--------------
 # below is a hard coded ip, will add the
 # automatic finder here later
-node_1.connect_with_node(local_ip, 8003)
+node_1.connect_with_node(local_ip, 8001)
 # node_1.connect_with_node("192.168.1.55", 8003)
 #--------------------------------------------------
 
@@ -65,7 +64,7 @@ time.sleep(1)
 
 count = 1
 while True:
-	val = input()
+	val = input("Enter your message: ")
 	node_1.send_to_nodes(val + "\nMESSAGE " + str(count) + " FROM IP " + local_ip) #THIS SENDS
 	time.sleep(5)
 	count += 1

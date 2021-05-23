@@ -48,7 +48,7 @@ def send_message():
 def offload_computation():
     print("Computation offloaded")
 
-def menu():
+def menu(node):
     print("************Welcome to X**************")
     #print()
 
@@ -61,7 +61,7 @@ def menu():
                         Please enter your choice: """)
 
     if choice == "A" or choice =="a":
-        no_connected_nodes()
+        node.print_connections()
     elif choice == "B" or choice =="b":
         send_message()
     elif choice == "C" or choice =="C":
@@ -97,7 +97,7 @@ node_1.start()
 
 time.sleep(1)
 
-menu()
+menu(node_1)
 '''
 while True:
 	val = input()

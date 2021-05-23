@@ -43,7 +43,15 @@ def no_connected_nodes():
     print("The number of connected nodes is: x")
 
 def send_message():
-    print("Message sent")
+    count = 0
+    while True:
+        val = input()
+        node_1.send_to_nodes(val + "\nMESSAGE " + str(count) + " FROM IP " + local_ip) #THIS SENDS
+        count += 1
+        time.sleep(1)
+        if val == "exit":
+            break
+
 
 def offload_computation():
     print("Computation offloaded")

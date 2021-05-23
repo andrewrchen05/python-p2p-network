@@ -1,10 +1,14 @@
 #---------LIBRARIES-------------------------------
+import os
 import sys
 import time
 import socket
 sys.path.insert(0, '..') # Import the files where the modules are located. This takes current directory
 #from MyOwnPeer2PeerNode import MyOwnPeer2PeerNode
 from p2pnetwork.node import Node
+from subprocess import call
+# from os import listdir
+# from os.path import isfile, join
 #--------------------------------------------------
 
 #========NODE CLASS================================
@@ -54,6 +58,17 @@ def send_message():
 
 
 def offload_computation():
+
+    # path = os.getcwd()   # gets current directory
+    path = "../scripts"
+
+    files = os.listdir(path)
+
+    for f in files:
+        print(type(f))
+        print("Running " + f)
+        call(["python", "../scripts/" + f])
+
     print("Computation offloaded")
 
 def menu(node):
@@ -72,14 +87,14 @@ def menu(node):
         node.print_connections()
     elif choice == "B" or choice =="b":
         send_message()
-    elif choice == "C" or choice =="C":
+    elif choice == "C" or choice =="c":
         offload_computation()
     elif choice=="D" or choice=="d":
         sys.exit
     else:
         print("You must only select a valid option")
         print("Please try again")
-        menu()                
+        menu(node)                
 #==================================================
 
 #---------THIS GETS THE LOCAL IPV4 ADDRESS---------

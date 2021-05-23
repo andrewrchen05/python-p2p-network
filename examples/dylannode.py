@@ -38,6 +38,40 @@ class MyOwnPeer2PeerNode (Node):
         
     def node_request_to_stop(self):
         print("node is requested to stop!")
+
+def no_connected_nodes():
+    print("The number of connected nodes is: x")
+
+def send_message():
+    print("Message sent")
+
+def offload_computation():
+    print("Computation offloaded")
+
+def menu():
+    print("************Welcome to X**************")
+    #print()
+
+    choice = input("""
+                        A: Check number of connected nodes
+                        B: Send message
+                        C: Offload computation
+                        D: Exit
+
+                        Please enter your choice: """)
+
+    if choice == "A" or choice =="a":
+        no_connected_nodes()
+    elif choice == "B" or choice =="b":
+        send_message()
+    elif choice == "C" or choice =="C":
+        offload_computation()
+    elif choice=="D" or choice=="d":
+        sys.exit
+    else:
+        print("You must only select a valid option")
+        print("Please try again")
+        menu()                
 #==================================================
 
 #---------THIS GETS THE LOCAL IPV4 ADDRESS---------
@@ -63,15 +97,15 @@ node_1.start()
 
 time.sleep(1)
 
-count = 1
+menu()
+'''
 while True:
 	val = input()
 	node_1.send_to_nodes(val + "\nMESSAGE " + str(count) + " FROM IP " + local_ip) #THIS SENDS
 	time.sleep(5)
-	count += 1
 	if val == "exit":
             break
-
+'''
 node_1.stop()
 
 print('end test')

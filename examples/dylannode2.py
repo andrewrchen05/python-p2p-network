@@ -48,20 +48,20 @@ class MyOwnPeer2PeerNode (Node):
         else:
             self.debug_print("Node send_to_node: Could not send the file, node is not found!")
 #==================================================================================================================
-    def outbound_node_connected(self, node):
-        print("outbound_node_connected: " + node.id)
+    #def outbound_node_connected(self, node):
+        # print("outbound_node_connected: " + node.id)
         
-    def inbound_node_connected(self, node):
-        print("inbound_node_connected: " + node.id)
+    #def inbound_node_connected(self, node):
+        # print("inbound_node_connected: " + node.id)
         #sendamessage here if they can connect 
 
-    def inbound_node_disconnected(self, node):
-        print("inbound_node_disconnected: " + node.id)
+    #def inbound_node_disconnected(self, node):
+        # print("inbound_node_disconnected: " + node.id)
 
-    def outbound_node_disconnected(self, node):
-        print("outbound_node_disconnected: " + node.id)
+    #def outbound_node_disconnected(self, node):
+        # print("outbound_node_disconnected: " + node.id)
 
-    def node_message(self, node, data): #THIS IS THE SHT FUNCTION THAT GETS THE MSG
+    '''def node_message(self, node, data): #THIS IS THE SHT FUNCTION THAT GETS THE MSG
         #print("node_message from " + node.id + ": " + (data))
         #print("you got mail" + data)
         #fullstring = "StackAbuse"
@@ -76,8 +76,8 @@ class MyOwnPeer2PeerNode (Node):
             print (output)
             self.send_to_nodes(str(output))
         else:
-            print("RECEIVED CHAT. I HAVE FRIENDS?")
-            print(stringer)
+            print("\nRECEIVED CHAT. I HAVE FRIENDS?")
+            print(stringer)'''
             
     def node_disconnect_with_outbound_node(self, node):
         print("node wants to disconnect with oher outbound node: " + node.id)
@@ -88,14 +88,9 @@ class MyOwnPeer2PeerNode (Node):
 #==================================================
 #==================================================
 def send_message():
-    count = 0
-    while True:
-        val = input()
-        node_1.send_to_nodes(val + "\nMESSAGE " + str(count) + " FROM IP " + local_ip) #THIS SENDS
-        count += 1
-        time.sleep(1)
-        if val == "exit":
-            break       
+    val = input("Enter your message here: ")
+    node_1.send_to_nodes(val + "\nMESSAGE FROM IP " + local_ip) #THIS SENDS
+    time.sleep(1)
 #==================================================
 #==================================================
 def offload_computation():

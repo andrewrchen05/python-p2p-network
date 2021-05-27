@@ -79,7 +79,8 @@ def menu(node):
                         A: Check number of connected nodes
                         B: Send message
                         C: Offload computation
-                        D: Exit
+                        D: Broadcast
+                        E: Exit
 
                         Please enter your choice: """)
 
@@ -90,6 +91,8 @@ def menu(node):
     elif choice == "C" or choice =="c":
         offload_computation()
     elif choice=="D" or choice=="d":
+        broadcast()
+    elif choice=="E" or choice=="e":
         sys.exit
     else:
         print("You must only select a valid option")

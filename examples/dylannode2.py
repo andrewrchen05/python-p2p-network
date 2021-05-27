@@ -114,32 +114,31 @@ def offload_computation():
         print("Running " + f)
         call(["python", "../scripts/" + f])
 
-    print("Computation offloaded")
 #==================================================
 #==================================================
 def menu(node):
     print("************Welcome to X**************")
     #print()
-
-    choice = input("""
+    while True:
+        choice = input("""
                         A: Check number of connected nodes
                         B: Send message
                         C: Offload computation
                         D: Exit
                         Please enter your choice: """)
 
-    if choice == "A" or choice =="a":
-        node.print_connections()
-    elif choice == "B" or choice =="b":
-        send_message()
-    elif choice == "C" or choice =="c":
-        offload_computation()
-    elif choice=="D" or choice=="d":
-        sys.exit
-    else:
-        print("You must only select a valid option")
-        print("Please try again")
-        menu(node)                
+        if choice == "A" or choice =="a":
+            node.print_connections()
+        elif choice == "B" or choice =="b":
+            send_message()
+        elif choice == "C" or choice =="c":
+            offload_computation()
+        elif choice=="D" or choice=="d":
+            break
+        else:
+            print("You must only select a valid option")
+            print("Please try again")
+            menu(node)                
 #==================================================
 #==================================================
 

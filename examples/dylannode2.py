@@ -84,6 +84,63 @@ class MyOwnPeer2PeerNode (Node):
         
     def node_request_to_stop(self):
         print("node is requested to stop!")
+
+#==================================================
+#==================================================
+def send_message():
+    count = 0
+    while True:
+        val = input()
+        node_1.send_to_nodes(val + "\nMESSAGE " + str(count) + " FROM IP " + local_ip) #THIS SENDS
+        count += 1
+        time.sleep(1)
+        if val == "exit":
+            break       
+#==================================================
+#==================================================
+def offload_computation():
+
+    # path = os.getcwd() # gets current directory
+    # ANDREW: MAKE A TRY STATEMENT HERE
+    # IF IT DOESNT EXIST, MAKE IT MAKE A DIRECTORY
+    # AND THE PROCEED WITH THE COMPUTATION
+    
+    path = "../scripts"
+
+    files = os.listdir(path)
+
+    for f in files:
+        print(type(f))
+        print("Running " + f)
+        call(["python", "../scripts/" + f])
+
+    print("Computation offloaded")
+#==================================================
+#==================================================
+def menu(node):
+    print("************Welcome to X**************")
+    #print()
+
+    choice = input("""
+                        A: Check number of connected nodes
+                        B: Send message
+                        C: Offload computation
+                        D: Exit
+                        Please enter your choice: """)
+
+    if choice == "A" or choice =="a":
+        node.print_connections()
+    elif choice == "B" or choice =="b":
+        send_message()
+    elif choice == "C" or choice =="c":
+        offload_computation()
+    elif choice=="D" or choice=="d":
+        sys.exit
+    else:
+        print("You must only select a valid option")
+        print("Please try again")
+        menu(node)                
+#==================================================
 #==================================================
 
 #---------THIS GETS THE LOCAL IPV4 ADDRESS---------
@@ -93,69 +150,21 @@ print("This is the LOCAL IP: " + local_ip)
 #--------------------------------------------------
 
 #---------THIS CREATES THE NODE--------------------
-node_1 = MyOwnPeer2PeerNode(local_ip, 8005)
+node_1 = MyOwnPeer2PeerNode(local_ip, 8006)
 #--------------------------------------------------
 
 #---------FIND NODES AND THEN CONNECT--------------
 # below is a hard coded ip, will add the
 # automatic finder here later
-#node_1.connect_with_node("192.168.1.66", 8001)
+node_1.connect_with_node(local_ip, 8005)
+node_1.start()
+time.sleep(1)
 #--------------------------------------------------
 
-node_1.start()
+#---------------STARTS THE MENU--------------------
 
-#try:
-#    node_1.connect_with_node("192.168.1.51", 8003)
-#except: 
-#    print("NOT A NODE")
-node_1.connect_with_node(local_ip, 8006)
-#node_1.connect_with_node("192.168.1.51", 8003)
-#node_1.connect_with_node("192.168.1.66", 8003)
-#for ping in range(1,69):
-#    address = "192.168.1." + str(ping)
-#    print("testing " + address)
-#    try:
-#        #tn = telnetlib.Telnet(address,PORT,.1)
-#        #print("adding " + address + "\n")
-##        #LEET.append(Switch(address,"root","","0","0"))
- #       node_1.connect_with_node(address, 8003)
- #   except:
-#        print(address + " not found or not a node")
-print("Printing Connections" + "\n")
-node_1.print_connections();
-FORMAT = "utf-8"
-SIZE = 1024
-#print("Sending bola to node 21" + "\n")
-#node_1.send_to_node(node_1.nodes_outbound[0],"bola")
-#time.sleep(1)
-#count = 1
-#node_1.send_file_to_nodes("yoo.txt");
-while True:
-    val = input("Enter your message: ")
-    #node_1.send_to_nodes("\nMESSAGE " + " FROM IP " + local_ip + ": " + val) #THIS SENDS
-    file = open(val, "r")
-    data = str(file.read())
-    #print("THIS IS FILE" + file)
-    #print("THIS IS DATA" + data)
-
-    node_1.send_to_nodes(data)
-    #node_1.send_to_nodes("REGULAR")
-    
-    #node_1.send_to_nodes(bytes(data,'utf-8'))
-    #try:
-    #node_1.send_to_nodes(f'yoo.txt'.encode()) #THIS SENDS
-    #print("Printing Connections" + "\n")
-    #node_1.print_connections();
-    time.sleep(2)
-    #count += 1
-    #except:
-    #print("error, this node no longer exists")
-
-#print("DYLAN SENDING JOBS TO EVERYONE" + "\n")
-#for n in node_1.nodes_outbound:
-#    node_1.send_to_node(n, f"ariga.py".encode())
-
-
+menu(node_1)
+#--------------------------------------------------
 
 node_1.stop()
 
